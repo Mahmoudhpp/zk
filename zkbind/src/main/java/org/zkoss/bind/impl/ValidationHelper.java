@@ -200,7 +200,9 @@ import org.zkoss.zk.ui.event.Event;
 		cp.add(p); //main property
 		if (checkFormFieldFromCollection) { //ZK-3185: Enable form validation with reference and collection binding
 			Property pc = ((SavePropertyBindingImpl) binding).getBasePropertyIfFromCollection(); //Check if field from collection
-			if (pc != null) cp.add(pc);
+			if (pc != null) {
+			    cp.add(pc);
+			}
 		}
 		validates.addAll(cp); //collect properties to be validated
 	}

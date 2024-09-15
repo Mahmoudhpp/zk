@@ -597,9 +597,15 @@ public class Verifier {
 		if (c == 0x0EC6) return true;
 		if (c == 0x3005) return true;
 
-		if (c < 0x3031) return false;  if (c <= 0x3035) return true;
-		if (c < 0x309D) return false;  if (c <= 0x309E) return true;
-		if (c < 0x30FC) return false;  if (c <= 0x30FE) return true;
+		if (c < 0x3031) {
+		    return false;
+		}  if (c <= 0x3035) return true;
+		if (c < 0x309D) {
+		    return false;
+		}  if (c <= 0x309E) return true;
+		if (c < 0x30FC) {
+		    return false;
+		}  if (c <= 0x30FE) return true;
 
 		return false;
 

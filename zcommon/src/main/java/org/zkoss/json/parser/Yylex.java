@@ -373,7 +373,9 @@ int getPosition(){
     zzEndRead = zzStartRead;  /* invalidate buffer    */
 
     if (zzReader != null)
-      zzReader.close();
+      {
+          zzReader.close();
+      }
   }
 
 
