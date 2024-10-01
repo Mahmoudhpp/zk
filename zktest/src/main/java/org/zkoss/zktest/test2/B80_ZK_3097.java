@@ -14,6 +14,7 @@ it will be useful, but WITHOUT ANY WARRANTY.
 */
 package org.zkoss.zktest.test2;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.zkoss.zhtml.Div;
 import org.zkoss.zhtml.impl.AbstractTag;
 import org.zkoss.zk.ui.Component;
@@ -51,6 +52,7 @@ public class B80_ZK_3097 extends SelectorComposer {
 
         ByteArrayInputStream oaos2 = new ByteArrayInputStream(_bytes);
         ObjectInputStream oIn = new ObjectInputStream(oaos2);
+        ObjectInputFilters.enableObjectFilterIfUnprotected(oIn);
         AbstractTag abt = (Div) oIn.readObject();
         oIn.close();
         oaos2.close();

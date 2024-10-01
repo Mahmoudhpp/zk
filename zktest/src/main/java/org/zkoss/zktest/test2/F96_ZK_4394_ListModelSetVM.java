@@ -1,5 +1,6 @@
 package org.zkoss.zktest.test2;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -143,6 +144,7 @@ public class F96_ZK_4394_ListModelSetVM implements Serializable {
 	public void doDeserialize0(Window win, Label msg) throws Exception {
 		ByteArrayInputStream oaos = new ByteArrayInputStream(_bytes);
 		ObjectInputStream oos = new ObjectInputStream(oaos);
+		ObjectInputFilters.enableObjectFilterIfUnprotected(oos);
 		Window newwin = (Window) oos.readObject();
 		Component parent = win.getParent();
 		Component ref = win.getNextSibling();

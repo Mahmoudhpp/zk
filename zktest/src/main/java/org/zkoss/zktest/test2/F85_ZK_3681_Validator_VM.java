@@ -1,5 +1,6 @@
 package org.zkoss.zktest.test2;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -76,6 +77,7 @@ public class F85_ZK_3681_Validator_VM implements Serializable {
 	private void doDeserialize0(Component comp, Label msg) throws Exception {
 		ByteArrayInputStream oaos = new ByteArrayInputStream(_bytes);
 		ObjectInputStream oos = new ObjectInputStream(oaos);
+		ObjectInputFilters.enableObjectFilterIfUnprotected(oos);
 
 		Component newcomp = (Component) oos.readObject();
 		Component parent = comp.getParent();

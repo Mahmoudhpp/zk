@@ -1,5 +1,6 @@
 package org.zkoss.zktest.test2;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.*;
 import java.util.*;
 
@@ -87,6 +88,7 @@ public class F80_ZK_3185VM implements Serializable {
 	public void doDeserialize0(Window win) throws Exception{
 		ByteArrayInputStream oaos = new ByteArrayInputStream(_bytes);
 		ObjectInputStream oos = new ObjectInputStream(oaos);
+		ObjectInputFilters.enableObjectFilterIfUnprotected(oos);
 
 		Window newwin = (Window) oos.readObject();
 		Page pg = win.getPage();

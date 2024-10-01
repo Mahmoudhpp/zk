@@ -11,6 +11,7 @@ Copyright (C) 2020 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.test2;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -96,6 +97,7 @@ public class B96_ZK_3563VM implements Serializable {
 	public void doDeserialize0(Component comp) throws Exception {
 		ByteArrayInputStream oaos = new ByteArrayInputStream(_bytes);
 		ObjectInputStream oos = new ObjectInputStream(oaos);
+		ObjectInputFilters.enableObjectFilterIfUnprotected(oos);
 		Component newComp = (Component) oos.readObject();
 		Page pg = comp.getPage();
 		Component parent = comp.getParent();

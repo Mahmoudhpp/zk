@@ -16,6 +16,7 @@ Copyright (C) 2011 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.util;
 
+import static io.github.pixee.security.ObjectInputFilters.createSafeObjectInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -49,7 +50,7 @@ public class Serializations {
 		ByteArrayOutputStream boa = new ByteArrayOutputStream();
 		new ObjectOutputStream(boa).writeObject(obj);
 		byte[] bs = boa.toByteArray();
-		return new ObjectInputStream(new ByteArrayInputStream(bs)).readObject();
+		return createSafeObjectInputStream(new ByteArrayInputStream(bs)).readObject();
 	}
 	
 	public static <E> ListModel<E> toCloneableListModelList(Collection<? extends E> c) {

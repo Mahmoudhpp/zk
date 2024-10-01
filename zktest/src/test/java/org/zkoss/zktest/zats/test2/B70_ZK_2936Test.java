@@ -11,6 +11,7 @@ Copyright (C) 2015 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.zats.test2;
 
+import static io.github.pixee.security.ObjectInputFilters.createSafeObjectInputStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -49,7 +50,7 @@ public class B70_ZK_2936Test {
 			ByteArrayOutputStream boa = new ByteArrayOutputStream();
 			new ObjectOutputStream(boa).writeObject(instance);
 			byte[] bs = boa.toByteArray();
-			InputStream outInstance = (InputStream) new ObjectInputStream(new ByteArrayInputStream(bs)).readObject();
+			InputStream outInstance = (InputStream) createSafeObjectInputStream(new ByteArrayInputStream(bs)).readObject();
 
 			BufferedReader in2 = new BufferedReader(new InputStreamReader(outInstance));
 

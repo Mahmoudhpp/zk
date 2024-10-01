@@ -11,6 +11,7 @@ Copyright (C) 2020 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.zats.test2;
 
+import static io.github.pixee.security.ObjectInputFilters.createSafeObjectInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -69,7 +70,7 @@ public class B90_ZK_4381_2Test {
 	private BinderImpl writeAndReadBack(BinderImpl binder) throws IOException, ClassNotFoundException {
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		new ObjectOutputStream(buffer).writeObject(binder);
-		return (BinderImpl) new ObjectInputStream(new ByteArrayInputStream(buffer.toByteArray())).readObject();
+		return (BinderImpl) createSafeObjectInputStream(new ByteArrayInputStream(buffer.toByteArray())).readObject();
 	}
 
 	@Test

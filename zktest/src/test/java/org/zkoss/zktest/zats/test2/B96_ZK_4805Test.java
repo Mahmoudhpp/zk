@@ -11,6 +11,7 @@ Copyright (C) 2021 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.zats.test2;
 
+import io.github.pixee.security.ObjectInputFilters;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
@@ -35,6 +36,7 @@ public class B96_ZK_4805Test {
 			oos.writeObject(jsv);
 		}
 		try (ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(baos.toByteArray()))) {
+			ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
 			JavaScriptValue newJsv = (JavaScriptValue) ois.readObject();
 			assertEquals(jsv.toJSONString(), newJsv.toJSONString());
 		}

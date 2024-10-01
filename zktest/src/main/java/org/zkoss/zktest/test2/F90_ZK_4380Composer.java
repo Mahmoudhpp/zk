@@ -11,6 +11,7 @@ Copyright (C) 2019 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.test2;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -152,6 +153,7 @@ public class F90_ZK_4380Composer extends SelectorComposer<Component> {
 	public void doDeserialize0(Component comp) throws Exception {
 		ByteArrayInputStream bais = new ByteArrayInputStream(_bytes);
 		ObjectInputStream ois = new ObjectInputStream(bais);
+		ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
 
 		Component newComp = (Component) ois.readObject();
 		Component parent = comp.getParent();

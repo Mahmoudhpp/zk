@@ -11,6 +11,7 @@ Copyright (C) 2014 Potix Corporation. All Rights Reserved.
  */
 package org.zkoss.zktest.bind.viewmodel.form;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -159,7 +160,8 @@ public class FormWithSet implements Serializable{
 	public void doDeserialize0(Window win, Label msg) throws Exception{
 		ByteArrayInputStream oaos = new ByteArrayInputStream(_bytes);
 		ObjectInputStream oos = new ObjectInputStream(oaos);
-		
+		ObjectInputFilters.enableObjectFilterIfUnprotected(oos);
+
 		Window newwin = (Window) oos.readObject();
 		Page pg = win.getPage();
 		Component parent = win.getParent();

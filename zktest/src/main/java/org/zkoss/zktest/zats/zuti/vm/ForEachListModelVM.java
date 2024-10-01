@@ -11,6 +11,7 @@ Copyright (C) 2015 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.zats.zuti.vm;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -146,6 +147,7 @@ public class ForEachListModelVM implements Serializable{
 	public void doDeserialize0(Window win, Label msg) throws Exception{
 		ByteArrayInputStream oaos = new ByteArrayInputStream(_bytes);
 		ObjectInputStream oos = new ObjectInputStream(oaos);
+		ObjectInputFilters.enableObjectFilterIfUnprotected(oos);
 		Window newwin = (Window) oos.readObject();
 		oos.close();
 		oaos.close();

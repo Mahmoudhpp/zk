@@ -11,6 +11,7 @@ Copyright (C) 2017 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.test2;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.zkoss.bind.BindUtils;
 import org.zkoss.bind.annotation.*;
 import org.zkoss.zk.ui.Component;
@@ -88,6 +89,7 @@ public class F85_ZK_3816VM implements Serializable {
 	public void doDeserialize0(Window win, Label msg) throws Exception {
 		ByteArrayInputStream oaos = new ByteArrayInputStream(_bytes);
 		ObjectInputStream oos = new ObjectInputStream(oaos);
+		ObjectInputFilters.enableObjectFilterIfUnprotected(oos);
 
 		Window newwin = (Window) oos.readObject();
 		Page pg = win.getPage();

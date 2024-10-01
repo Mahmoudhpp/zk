@@ -12,6 +12,7 @@ Copyright (C) 2020 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.zats.test2;
 
+import static io.github.pixee.security.ObjectInputFilters.createSafeObjectInputStream;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayInputStream;
@@ -126,7 +127,7 @@ public class B90_ZK_4381Test extends BaseTestCase {
 			if (bytes != null) {
 				try {
 					LOG.debug("readObject: {}", id);
-					Session restoredSession = (Session) new ObjectInputStream(new ByteArrayInputStream(bytes)).readObject();
+					Session restoredSession = (Session) createSafeObjectInputStream(new ByteArrayInputStream(bytes)).readObject();
 					MapSession newSession = new MapSession(id);
 					for (String attributeName : restoredSession.getAttributeNames()) {
 						newSession.setAttribute(attributeName, restoredSession.getAttribute(attributeName));

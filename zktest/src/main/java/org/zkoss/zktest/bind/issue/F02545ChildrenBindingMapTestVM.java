@@ -1,5 +1,6 @@
 package org.zkoss.zktest.bind.issue;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -92,6 +93,7 @@ public class F02545ChildrenBindingMapTestVM implements Serializable{
 		System.out.println("doDeserialize");
 		ByteArrayInputStream oaos = new ByteArrayInputStream(_bytes);
 		ObjectInputStream oos = new ObjectInputStream(oaos);
+		ObjectInputFilters.enableObjectFilterIfUnprotected(oos);
 		Window newwin = (Window) oos.readObject();
 		oos.close();
 		oaos.close();

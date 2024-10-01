@@ -14,6 +14,7 @@ it will be useful, but WITHOUT ANY WARRANTY.
 */
 package org.zkoss.zktest.zats.test2;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -51,6 +52,7 @@ public class B80_ZK_3282Test extends ZATSTestCase{
 		
 		//deserialize
 		ObjectInputStream serIn = new ObjectInputStream(new ByteArrayInputStream(dataOut.toByteArray()));
+		ObjectInputFilters.enableObjectFilterIfUnprotected(serIn);
 		return (Component) serIn.readObject();
 	}
 }

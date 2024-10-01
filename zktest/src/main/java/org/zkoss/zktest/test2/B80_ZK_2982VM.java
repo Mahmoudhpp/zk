@@ -11,6 +11,7 @@ Copyright (C) 2015 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.test2;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -47,6 +48,7 @@ public class B80_ZK_2982VM implements Serializable {
 
 		ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
 		ObjectInputStream ois = new ObjectInputStream(bais);
+		ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
 
 		Div newdiv = (Div) ois.readObject();
 		div.detach();

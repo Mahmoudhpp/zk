@@ -14,6 +14,7 @@ it will be useful, but WITHOUT ANY WARRANTY.
 */
 package org.zkoss.zktest.test2;
 
+import io.github.pixee.security.ObjectInputFilters;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.ObjectInputStream;
@@ -110,6 +111,7 @@ public class F80_ZK_2831 implements Serializable {
 	public void doDeserialize0(Div win, Label msg) throws Exception{
 		ByteArrayInputStream oaos = new ByteArrayInputStream(_bytes);
 		ObjectInputStream oos = new ObjectInputStream(oaos);
+		ObjectInputFilters.enableObjectFilterIfUnprotected(oos);
 
 		Div newwin = (Div) oos.readObject();
 		Page pg = win.getPage();
