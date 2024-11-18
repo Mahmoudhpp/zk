@@ -11,6 +11,8 @@ Copyright (C) 2024 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.util;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -45,13 +47,13 @@ public class URLs {
 				String internalPath = parts[1];
 
 				// Ensure the jarFilePath is properly formed
-				URL jarURL = new URL(jarFilePath);
+				URL jarURL = Urls.create(jarFilePath, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 				URI jarURI = new URIBuilder().setScheme(jarURL.getProtocol())
 						.setHost(jarURL.getHost()).setPort(jarURL.getPort())
 						.setPath(jarURL.getPath()).build();
 
 				// Combine the jar URI with the internal path
-				return new URL("jar:" + jarURI + "!/" + internalPath);
+				return Urls.create("jar:" + jarURI + "!/" + internalPath, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 			} else {
 				throw new MalformedURLException("Invalid JAR URL format");
 			}

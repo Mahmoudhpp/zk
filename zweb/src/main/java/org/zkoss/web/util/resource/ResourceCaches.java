@@ -16,6 +16,8 @@ Copyright (C) 2005 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.web.util.resource;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
@@ -71,7 +73,7 @@ public class ResourceCaches {
 		else if (path.charAt(0) != '/') {
 			if (path.indexOf("://") > 0) {
 				try {
-					url = new URL(path);
+					url = Urls.create(path, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 				} catch (java.net.MalformedURLException ex) {
 					throw new SystemException(ex);
 				}

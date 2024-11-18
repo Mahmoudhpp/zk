@@ -14,6 +14,8 @@ Copyright (C) 2001 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.web.servlet;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import static org.zkoss.lang.Generics.cast;
 
 import java.io.BufferedInputStream;
@@ -870,7 +872,7 @@ public class Servlets {
 		String s;
 		if (uri != null && ((s = uri.toLowerCase(java.util.Locale.ENGLISH)).startsWith("http://")
 				|| s.startsWith("https://") || s.startsWith("ftp://")))
-			return new URL(uri);
+			return Urls.create(uri, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 		return null;
 	}
 
