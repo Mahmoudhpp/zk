@@ -11,6 +11,7 @@ Copyright (C) 2022 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zk.au.http;
 
+import io.github.pixee.security.Filenames;
 import static java.util.stream.Collectors.mapping;
 import static java.util.stream.Collectors.toList;
 import static org.zkoss.zk.ui.ext.Uploadable.Error.SERVER_EXCEPTION;
@@ -513,7 +514,7 @@ public class AuMultipartUploader {
 	/** Returns the base name for FileItem (i.e., removing path).
 	 */
 	private static String getBaseName(FileItem fi) {
-		String name = fi.getName();
+		String name = Filenames.toSimpleFileName(fi.getName());
 		if (name == null)
 			return null;
 
