@@ -16,6 +16,7 @@ Copyright (C) 2005 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zk.ui.http;
 
+import io.github.pixee.security.Newlines;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
@@ -502,7 +503,7 @@ public class ExecutionImpl extends AbstractExecution {
 	}
 
 	public void setResponseHeader(String name, String value) {
-		_response.setHeader(name, value);
+		_response.setHeader(name, Newlines.stripAll(value));
 	}
 
 	public void setResponseHeader(String name, Date value) {

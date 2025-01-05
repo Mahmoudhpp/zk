@@ -15,6 +15,7 @@ package org.zkoss.zktest.util;
  * @author jumperchen
  */
 
+import io.github.pixee.security.Newlines;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -83,7 +84,7 @@ public class ZkCspFilterStrictDynamic implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletResponse servletResponse = (HttpServletResponse) response;
-		servletResponse.setHeader("Content-Security-Policy", String.format(cspHeader, hex));
+		servletResponse.setHeader("Content-Security-Policy", Newlines.stripAll(String.format(cspHeader, hex)));
 
 		CapturingResponseWrapper capturingResponseWrapper = new CapturingResponseWrapper(
 				servletResponse);

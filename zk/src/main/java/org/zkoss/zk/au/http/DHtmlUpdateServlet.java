@@ -16,6 +16,7 @@ Copyright (C) 2005 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zk.au.http;
 
+import io.github.pixee.security.Newlines;
 import static org.zkoss.lang.Generics.cast;
 
 import java.io.IOException;
@@ -489,7 +490,7 @@ public class DHtmlUpdateServlet extends HttpServlet {
 				responseError(request, response, "Illegal request");
 				return;
 			}
-			response.setHeader("ZK-SID", sid);
+			response.setHeader("ZK-SID", Newlines.stripAll(sid));
 		}
 
 		//parse commands
@@ -535,11 +536,11 @@ public class DHtmlUpdateServlet extends HttpServlet {
 			wappc.getUiEngine().execUpdate(exec, aureqs, out);
 		} catch (ActivationTimeoutException ex) {
 			log.warn(ex.getMessage());
-			response.setHeader("ZK-SID", sid);
+			response.setHeader("ZK-SID", Newlines.stripAll(sid));
 			response.setIntHeader("ZK-Error", AuResponse.SC_ACTIVATION_TIMEOUT);
 		} catch (RequestOutOfSequenceException ex) {
 			log.warn(ex.getMessage());
-			response.setHeader("ZK-SID", sid);
+			response.setHeader("ZK-SID", Newlines.stripAll(sid));
 			response.setIntHeader("ZK-Error", AuResponse.SC_OUT_OF_SEQUENCE);
 		}
 		out.close(request, response);
@@ -570,7 +571,7 @@ public class DHtmlUpdateServlet extends HttpServlet {
 				responseError(request, response, "Illegal request");
 				return;
 			}
-			response.setHeader("ZK-SID", sid);
+			response.setHeader("ZK-SID", Newlines.stripAll(sid));
 		}
 		final AuWriter out = AuWriters.newInstance();
 		out.setCompress(compress);
