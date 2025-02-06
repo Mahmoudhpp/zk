@@ -16,6 +16,7 @@ Copyright (C) 2004 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.util.media;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.util.Map;
 import java.util.HashMap;
 import java.io.InputStream;
@@ -153,7 +154,7 @@ public class ContentTypes {
 		try {
 			in = new BufferedReader(new InputStreamReader(strm));
 			String line;
-			while ((line = in.readLine()) != null) {
+			while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null) {
 				final int j = line.indexOf('=');
 				if (j < 0) {
 					final int k = Strings.skipWhitespaces(line, 0);

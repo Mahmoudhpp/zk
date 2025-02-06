@@ -16,6 +16,7 @@ Copyright (C) 2001 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -124,7 +125,7 @@ public class Maps {
 		try {
 			String prefix = null;
 			String line;
-			for (int lno = 1; (line = in.readLine()) != null; ++lno) {
+			for (int lno = 1; (line = BoundedLineReader.readLine(in, 5_000_000)) != null; ++lno) {
 				int len = line.length();
 				if (len == 0)
 					continue;
@@ -172,7 +173,7 @@ public class Maps {
 				if (j == k && line.charAt(k) == '{') { //pack multiple lines
 					final StringBuilder sb = new StringBuilder();
 					for (int lnoFrom = lno;;) {
-						line = in.readLine();
+						line = BoundedLineReader.readLine(in, 5_000_000);
 						++lno;
 						if (line == null){
 							log.warn(

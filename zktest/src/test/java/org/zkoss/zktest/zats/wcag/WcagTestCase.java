@@ -11,6 +11,7 @@ Copyright (C) 2020 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.zats.wcag;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.junit.jupiter.api.Assertions;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -46,7 +47,7 @@ public abstract class WcagTestCase extends WebDriverTestCase {
 			// get whole lighthouse a11y results
 			Process process = Runtime.getRuntime().exec("lighthouse " + url + " --output=json --chrome-flags=\"--headless\" --only-categories=\"accessibility\"");
 			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			while ((line = reader.readLine()) != null) data += line;
+			while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) data += line;
 			JSONParser parser = new JSONParser();
 			JSONObject audits = (JSONObject)((JSONObject) parser.parse(data)).get("audits");
 
