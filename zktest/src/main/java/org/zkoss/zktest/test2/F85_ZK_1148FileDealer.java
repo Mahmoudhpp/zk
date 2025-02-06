@@ -11,6 +11,7 @@ Copyright (C) 2018 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.test2;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -45,7 +46,7 @@ public class F85_ZK_1148FileDealer {
 			File src = new File("src/main/webapp/test2/ZK1148.txt");
 			FileReader fw = new FileReader(src);
 			BufferedReader bw = new BufferedReader(fw);;
-			result = bw.readLine();
+			result = BoundedLineReader.readLine(bw, 5_000_000);
 			bw.close();
 			fw.close();
 		} catch (IOException e) {

@@ -11,6 +11,7 @@ Copyright (C) 2015 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zktest.zats.test2;
 
+import io.github.pixee.security.BoundedLineReader;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -39,7 +40,7 @@ public class B70_ZK_2936Test {
 			String line;
 
 			StringBuilder sb = new StringBuilder();
-			while ((line = in.readLine()) != null) {
+			while ((line = BoundedLineReader.readLine(in, 5_000_000)) != null) {
 				sb.append(line);
 			}
 
@@ -54,7 +55,7 @@ public class B70_ZK_2936Test {
 			BufferedReader in2 = new BufferedReader(new InputStreamReader(outInstance));
 
 			StringBuilder sb2 = new StringBuilder();
-			while ((line = in2.readLine()) != null) {
+			while ((line = BoundedLineReader.readLine(in2, 5_000_000)) != null) {
 				sb2.append(line);
 			}
 
