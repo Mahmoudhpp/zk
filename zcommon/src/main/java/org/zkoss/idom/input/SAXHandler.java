@@ -15,6 +15,8 @@ Copyright (C) 2001 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.idom.input;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Iterator;
@@ -664,7 +666,7 @@ implements LexicalHandler, DeclHandler {
 		//performance by loading it locally by below codes
 		if (systemId.indexOf("file:/") >= 0) {
 			try {
-				final InputSource is = new InputSource(new URL(systemId).openStream());
+				final InputSource is = new InputSource(Urls.create(systemId, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openStream());
 				is.setSystemId(systemId);
 //				if (log.finerable()) log.finer("Entity found "+systemId);
 				return is;
