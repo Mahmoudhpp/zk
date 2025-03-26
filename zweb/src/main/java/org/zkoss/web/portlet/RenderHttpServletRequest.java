@@ -16,6 +16,7 @@ Copyright (C) 2006 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.web.portlet;
 
+import static io.github.pixee.security.jakarta.PathValidator.validateDispatcherPath;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.util.Collection;
@@ -235,7 +236,7 @@ public class RenderHttpServletRequest implements HttpServletRequest {
 	}
 
 	public javax.servlet.RequestDispatcher getRequestDispatcher(String path) {
-		return _hreq != null ? _hreq.getRequestDispatcher(path) : null; //implies we don't support relative URI
+		return _hreq != null ? _hreq.getRequestDispatcher(validateDispatcherPath(path)) : null; //implies we don't support relative URI
 	}
 
 	public String getScheme() {
