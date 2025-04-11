@@ -16,6 +16,7 @@ Copyright (C) 2008 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zk.fn;
 
+import io.github.pixee.security.Newlines;
 import java.io.StringWriter;
 import java.util.Calendar;
 import java.util.Iterator;
@@ -159,7 +160,7 @@ public class JspFns {
 	 */
 	public static void setCacheControl(HttpServletResponse response, String prop, int hours) {
 		if (prop == null || !"false".equals(Library.getProperty(prop))) {
-			response.setHeader("Cache-Control", "public, max-age=" + hours * 3600); //unit: seconds
+			response.setHeader("Cache-Control", Newlines.stripAll("public, max-age=" + hours * 3600)); //unit: seconds
 
 			final Calendar cal = Calendar.getInstance();
 			cal.add(cal.HOUR, hours);
@@ -186,7 +187,7 @@ public class JspFns {
 	public static boolean setCacheControl(ServletContext context, HttpServletRequest request,
 			HttpServletResponse response, String prop, int hours) {
 		if (prop == null || !"false".equals(Library.getProperty(prop))) {
-			response.setHeader("Cache-Control", "public, max-age=" + hours * 3600); //unit: seconds
+			response.setHeader("Cache-Control", Newlines.stripAll("public, max-age=" + hours * 3600)); //unit: seconds
 
 			final Calendar cal = Calendar.getInstance();
 			cal.add(cal.HOUR, hours);
@@ -197,11 +198,11 @@ public class JspFns {
 				final String inm = request.getHeader("If-None-Match");
 				if (inm != null && inm.equals(etag)) {
 					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-					response.setHeader("ETag", etag);
+					response.setHeader("ETag", Newlines.stripAll(etag));
 					request.setAttribute("ETagMatched", Boolean.TRUE);
 					return true;
 				}
-				response.setHeader("ETag", etag);
+				response.setHeader("ETag", Newlines.stripAll(etag));
 			}
 		}
 		return false;

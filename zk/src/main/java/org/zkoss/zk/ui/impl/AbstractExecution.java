@@ -16,6 +16,7 @@ Copyright (C) 2005 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zk.ui.impl;
 
+import io.github.pixee.security.Newlines;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.UnsupportedEncodingException;
@@ -438,7 +439,7 @@ public abstract class AbstractExecution implements Execution, ExecutionCtrl {
 				String updateURI = _desktop.getUpdateURI(
 						AuRedirect.URI_PREFIX + "?" + AuRedirect.REDIRECT_URL_PARAMETER + "=" + destUrlParam);
 				updateURI = resp.encodeRedirectURL(updateURI);
-				resp.setHeader("Location", updateURI);
+				resp.setHeader("Location", Newlines.stripAll(updateURI));
 				resp.setStatus(HttpServletResponse.SC_FOUND);
 			} catch (UnsupportedEncodingException e) {
 				_zklog.warn("", e);

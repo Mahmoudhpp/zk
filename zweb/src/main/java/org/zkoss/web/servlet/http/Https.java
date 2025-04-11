@@ -14,6 +14,7 @@ Copyright (C) 2001 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.web.servlet.http;
 
+import io.github.pixee.security.Newlines;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -564,7 +565,7 @@ public class Https extends Servlets {
 									+ ";filename*=UTF-8''" + encodeRfc3986(
 									flnm);
 				}
-				response.setHeader("Content-Disposition", contentDisposition);
+				response.setHeader("Content-Disposition", Newlines.stripAll(contentDisposition));
 			}
 
 			final String rs = request.getHeader("Range");
@@ -679,7 +680,7 @@ public class Https extends Servlets {
 				int t = to >= 0 && to < data.length ? to : data.length - 1;
 				int cnt = t - f + 1;
 				response.setContentLength(cnt);
-				response.setHeader("Content-Range", "bytes " + f + "-" + t + "/" + data.length);
+				response.setHeader("Content-Range", Newlines.stripAll("bytes " + f + "-" + t + "/" + data.length));
 
 				out.write(data, f, cnt);
 			} else {
