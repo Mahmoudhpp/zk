@@ -18,6 +18,7 @@ Copyright (C) 2008 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zksandbox;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -87,7 +88,7 @@ public class DemoWebAppInit implements WebAppInit {
 			BufferedReader bufReader = new BufferedReader(
 					new InputStreamReader(context.getResourceAsStream(PATH + CONFIG)));
 			String prop = null;
-			while ((prop = bufReader.readLine()) != null) {
+			while ((prop = BoundedLineReader.readLine(bufReader, 5_000_000)) != null) {
 				int begin = prop.indexOf("=");
 				if (prop.startsWith("#") || prop.startsWith("!") || begin == -1)
 					continue;
