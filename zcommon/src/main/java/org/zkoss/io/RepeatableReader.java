@@ -247,7 +247,7 @@ public class RepeatableReader extends Reader implements Repeatable, Serializable
 					new File(System.getProperty("java.io.tmpdir"), "zk");
 				if (!f.isDirectory())
 					f.mkdir();
-				_f = File.createTempFile("zk.io", ".zk.io", f);
+				_f = Files.createTempFile(f.toPath(), "zk.io", ".zk.io").toFile();
 				final String cnt = ((StringWriter)_out).toString();
 				_out = new FileWriter(_f, "UTF-8");
 				_out.write(cnt);

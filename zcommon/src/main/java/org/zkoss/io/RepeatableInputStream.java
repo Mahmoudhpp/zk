@@ -187,7 +187,7 @@ public class RepeatableInputStream extends InputStream implements Repeatable,
 					new File(System.getProperty("java.io.tmpdir"), "zk");
 				if (!f.isDirectory())
 					f.mkdir();
-				_f = File.createTempFile("zk.io", ".zk.io", f);
+				_f = Files.createTempFile(f.toPath(), "zk.io", ".zk.io").toFile();
 				final byte[] bs = ((ByteArrayOutputStream)_out).toByteArray();
 				_out = new BufferedOutputStream(new FileOutputStream(_f));
 				_out.write(bs);
