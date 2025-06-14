@@ -16,6 +16,8 @@ Copyright (C) 2005 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.zk.ui;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import java.io.IOException;
 import java.io.Reader;
 import java.net.MalformedURLException;
@@ -155,7 +157,7 @@ public class Executions {
 				sb.append('/');
 			uri = sb.append(uri).toString();
 		}
-		return new URL(uri);
+		return Urls.create(uri, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
 	}
 
 	/** Creates components from a page file specified by an URI.
