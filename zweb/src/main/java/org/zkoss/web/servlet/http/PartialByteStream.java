@@ -11,6 +11,7 @@ Copyright (C) 2018 Potix Corporation. All Rights Reserved.
 */
 package org.zkoss.web.servlet.http;
 
+import io.github.pixee.security.Newlines;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
@@ -34,7 +35,7 @@ import javax.servlet.http.HttpServletResponse;
 
 		int from = _from <= _ofs ? _from : _ofs - 1;
 		int to = _to >= 0 && _to <= _ofs ? _to : _ofs - 1;
-		response.setHeader("Content-Range", "bytes " + from + "-" + to + "/" + _ofs);
+		response.setHeader("Content-Range", Newlines.stripAll("bytes " + from + "-" + to + "/" + _ofs));
 
 		writeTo(response.getOutputStream());
 	}
